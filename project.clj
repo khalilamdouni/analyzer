@@ -4,7 +4,10 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/tools.logging "0.2.3"]
                  [log4j "1.2.16"]
-                 [compojure "1.1.6"]]
+                 [compojure "1.1.6"]
+                 [org.clojure/java.jdbc "0.0.6"]
+                 [org.clojure/clojure-contrib "1.2.0"]
+                 [mysql/mysql-connector-java "5.1.6"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler analyzer.handler/app}
   :profiles
