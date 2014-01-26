@@ -7,16 +7,20 @@
             [org.analyzer.db.db-io :as dao]
             [org.analyzer.presentation.xml-presentation :as presentation]))
 
-(defn say-hello [name]
-  (logger/info (str "begin of say-hello function with :name, " name))
-  (logger/info (str "end of say-hello function with :name, " name))
-  (str (config/get-property "hello.world") name)
+; Function returning the welconme word from the properties file
+(defn welcome []
+  (str name (config/get-property "welcome.word"))
 )
 
+; The central rooter of the application
 (defroutes app-routes
-  (GET "/" [name] (say-hello name))
-  (GET "/report" [id] (dao/get-report id))
-  (GET "/reports" [] (presentation/get-reports-xml))
+  (GET "/" [] (welcome))
+  (GET "/report" [id] {:status 200
+                      :headers {"Content-Type" "text/xml"}
+                      :body (presentation/get-report-xml id)})
+  (GET "/reports" [] {:status 200
+                      :headers {"Content-Type" "text/xml"}
+                      :body (presentation/get-reports-xml)})
   (route/resources "/")
   (route/not-found "Not Found"))
 

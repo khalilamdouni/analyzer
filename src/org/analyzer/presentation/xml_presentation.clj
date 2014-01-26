@@ -12,6 +12,10 @@
 
 ; Presentation method used to get reports formatted in xml
 (defn get-reports-xml [] 
- (with-out-str (apply str (map report-to-xml (dao/get-reports))))
+  (str "<reports>" (with-out-str (apply str (map report-to-xml (dao/get-reports)))) "</reports>")
 )
 
+; Presentation method used to get report formatted in xml
+(defn get-report-xml [id] 
+ (with-out-str (apply str (map report-to-xml (dao/get-report id))))
+)

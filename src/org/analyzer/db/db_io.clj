@@ -18,4 +18,4 @@
 (defn get-report [id]
    (sql/with-connection db 
     (sql/with-query-results rs ["select * from REPORTING_REPORTS where ID=?" id]  
-      (apply str rs))))
+      (doall rs))))
