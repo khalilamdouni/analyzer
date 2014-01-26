@@ -4,7 +4,8 @@
             [compojure.route :as route]
             [clojure.tools.logging :as logger]
             [org.analyzer.config.config-manager :as config]
-            [org.analyzer.db.db-io :as dao]))
+            [org.analyzer.db.db-io :as dao]
+            [org.analyzer.presentation.xml-presentation :as presentation]))
 
 (defn say-hello [name]
   (logger/info (str "begin of say-hello function with :name, " name))
@@ -15,6 +16,7 @@
 (defroutes app-routes
   (GET "/" [name] (say-hello name))
   (GET "/report" [id] (dao/get-report id))
+  (GET "/reports" [] (presentation/get-reports-xml))
   (route/resources "/")
   (route/not-found "Not Found"))
 
