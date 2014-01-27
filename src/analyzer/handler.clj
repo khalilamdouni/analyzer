@@ -16,11 +16,14 @@
 (defroutes app-routes
   (GET "/" [] (welcome))
   (GET "/report" [id] {:status 200
-                      :headers {"Content-Type" "text/xml"}
-                      :body (presentation/get-report-xml id)})
+                       :headers {"Content-Type" "text/xml"}
+                       :body (presentation/get-report-xml id)})
   (GET "/reports" [] {:status 200
                       :headers {"Content-Type" "text/xml"}
                       :body (presentation/get-reports-xml)})
+  (GET "/analysis" [report-id1 report-id2] {:status 200
+                                            :headers {"Content-Type" "text/xml"}
+                                            :body (presentation/analysis-points report-id1 report-id2)})
   (route/resources "/")
   (route/not-found "Not Found"))
 
